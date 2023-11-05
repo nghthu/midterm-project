@@ -1,0 +1,167 @@
+.container {
+  background: url("/boat-sailing-ocean.jpg");
+  height: 130vh;
+  background-size: cover;
+  background-position: center;
+}
+
+.logout {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.logout button {
+  margin-top: 15px;
+  margin-right: 60px;
+}
+
+.container h1 {
+  font-size: 5rem;
+  font-weight: 900;
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: max-content;
+  color: white;
+}
+
+.card {
+  background-color: white;
+  height: 85vh;
+  width: 700px;
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  background-color: #ffffff;
+  border: none;
+  padding: 10px 30px 10px 30px;
+}
+
+.container input {
+  background-color: #e2dddb70;
+  margin-bottom: 15px;
+  border: none;
+  border-radius: 4px;
+}
+
+.invalid-input {
+  border-bottom: 2px solid #e87c03;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  height: 70px;
+  padding: 15px 10px 0 30px;
+  margin-bottom: 20px;
+}
+
+.header img {
+  width: 170px;
+}
+
+.edit-label {
+  color: #484c59;
+  font-weight: bold;
+  font-size: 3rem;
+}
+
+.none-display {
+  visibility: hidden;
+}
+
+.input-fields {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100%;
+}
+
+.form button {
+  color: #44465e;
+  width: 170px;
+  height: 35px;
+}
+
+.input-fields input {
+  width: 300px;
+  height: 45px;
+  padding: 0 10px 0 10px;
+}
+
+.input-fields p {
+  font-size: 1.3rem;
+}
+
+.radio-group {
+  display: flex;
+  font-size: 1.5rem;
+  gap: 25px;
+  margin-top: 30px;
+}
+
+.radio-container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.radio-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.checkmark {
+  position: absolute;
+  top: 2px;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #e2dddb70;
+  border-radius: 50%;
+}
+
+.radio-container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+.container input:checked ~ .checkmark {
+  background-color: #043e70;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.radio-container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.radio-container .checkmark:after {
+  top: 6px;
+  left: 6px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
+}

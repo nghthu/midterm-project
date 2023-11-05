@@ -1,0 +1,88 @@
+.signup {
+  background: linear-gradient(#000000cf, #00000097), url("/view-boat-water.jpg");
+  height: 130vh;
+  background-size: cover;
+  background-position: center;
+}
+
+.card {
+  background-color: white;
+  height: 110vh;
+  width: 450px;
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  background-color: #030304ab;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.login a:hover {
+  text-decoration: underline;
+}
+
+.container input {
+  background-color: #333333;
+  margin-bottom: 15px;
+  border: none;
+}
+
+.invalid-input {
+  border-bottom: 2px solid #e87c03;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  height: 70px;
+  padding: 15px 10px 0 30px;
+  margin-bottom: 20px;
+}
+
+.header img {
+  width: 170px;
+}
+
+.signin-label {
+  color: white;
+  font-weight: bold;
+  font-size: 30px;
+  margin-bottom: 25px;
+}
+
+.signin-form button {
+  width: 370px;
+  height: 45px;
+  margin-top: 25px;
+  font-size: 15px;
+}
+
+.signin-form p {
+  font-size: 13px;
+  color: #dd7505;
+
+  margin-bottom: 15px;
+  padding-left: 3px;
+}
+
+.none-display {
+  visibility: hidden;
+}
+
+.login {
+  margin-top: 60px;
+  display: flex;
+}
+
+.login a {
+  color: white;
+  margin-left: 5px;
+}

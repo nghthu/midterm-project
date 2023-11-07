@@ -1,9 +1,12 @@
+"use client";
+
 import Link from "next/link";
 import styles from "./page.module.css";
 import Button from "@/components/UI/Button";
-import Input from "@/components/UI/Input";
 
 const Dashboard = () => {
+  const submitHandler = async (event) => {};
+
   return (
     <div className={styles.container}>
       <div className={styles.logout}>
@@ -13,7 +16,7 @@ const Dashboard = () => {
       </div>
       <h1>Hello, Username!</h1>
       <div className={styles.card}>
-        <form className={styles.form}>
+        <form onSubmit={submitHandler} className={styles.form}>
           <p className={styles["edit-label"]}>Edit your Profile</p>
           <div className={styles["input-fields"]}>
             <div className={styles.column}>

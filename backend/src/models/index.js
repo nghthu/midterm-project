@@ -1,8 +1,14 @@
 import { Sequelize, DataTypes } from "sequelize";
-import { DB_URI } from "../lib/constants";
+import { DATABASE_URL } from "../lib/constants";
 import initUser from "./userModel";
 
-const sequelize = new Sequelize(DB_URI);
+const sequelize = new Sequelize(DATABASE_URL, {
+  dialectOptions: {
+    ssl: {
+      require: true,
+    },
+  },
+});
 
 sequelize
   .authenticate()
@@ -10,11 +16,11 @@ sequelize
     console.log("Sequelize connected");
   })
   .catch((err) => {
-    throw new Error(err);
+    console.error(err);
   });
 
 const User = initUser(sequelize, DataTypes);
 
-sequelize.sync();
+// sequelize.sync();
 
 export { sequelize, User };

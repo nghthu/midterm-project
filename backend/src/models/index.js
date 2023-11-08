@@ -23,6 +23,4 @@ sequelize
 
 const User = initUser(sequelize, DataTypes);
 
-// sequelize.sync();
-
 export { sequelize, User };

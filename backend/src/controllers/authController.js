@@ -101,7 +101,7 @@ const handleRefreshToken = async (req, res) => {
 };
 
 const logout = async (req, res) => {
-  const { refreshToken } = req.body.refreshToken;
+  const { refreshToken } = req.body;
 
   // Verify refresh token
   const result = jwt.verify(

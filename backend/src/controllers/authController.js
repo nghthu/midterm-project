@@ -11,6 +11,7 @@ import {
   ERROR_UNKNOWN,
   JWT_ERROR_TOKEN_EXPIRED,
   ERROR_BAD_REQUEST,
+  MESSAGE_LOGOUT_SUCCESSFULLY,
 } from "../lib/constants";
 import { User } from "../models";
 
@@ -120,6 +121,12 @@ const logout = async (req, res) => {
           error: err,
         };
       }
+      if (decoded.id !== req.user.id) {
+        return {
+          status: 400,
+          error: ERROR_BAD_REQUEST,
+        };
+      }
       return {
         status: 200,
         decoded,
@@ -138,7 +145,9 @@ const logout = async (req, res) => {
     throw new Error(ERROR_BAD_REQUEST);
   }
   await user.update({ refreshToken: "" });
-  return;
+  return res.json({
+    message: MESSAGE_LOGOUT_SUCCESSFULLY,
+  });
 };
 
 const validateSignupInput = (req, res, next) => {

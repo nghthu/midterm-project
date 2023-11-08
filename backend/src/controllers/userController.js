@@ -1,20 +1,23 @@
 import { User } from "../models";
 
-const getUserProfile = async (req, res) => {
-  try {
-    const user = await User.findByPk(req.user.id, {
-      attributes: ["full_name", "email", "tel", "sex", "address"],
-    });
-    return res.json({
-      fullName: user.full_name,
-      email: user.email,
-      tel: user.tel,
-      sex: user.sex,
-      address: user.address,
-    });
-  } catch (err) {
-    console.error(err);
-  }
+const getProfile = async (req, res) => {
+  const user = await User.findByPk(req.user.id, {
+    attributes: ["fullName", "email", "tel", "sex", "address"],
+  });
+  return res.json(user);
 };
 
-export { getUserProfile };
+const editProfile = async (req, res) => {
+  const profile = req.body;
+  const user = await User.findByPk(req.user.id);
+  await user.update({ ...profile });
+  return res.json({
+    email: user.email,
+    fullName: user.fullName,
+    tel: user.tel,
+    sex: user.sex,
+    address: user.address,
+  });
+};
+
+export { getProfile, editProfile };

@@ -5,7 +5,6 @@ import authRouter from "./routes/authRoute";
 import userRouter from "./routes/userRoute";
 
 const app = express();
-const PORT = 3000;
 
 app.use(cors());
 app.use(express.json());
@@ -29,10 +28,6 @@ app.use((err, req, res, next) => {
   res.status(status).json({
     error: err.message,
   });
-});
-
-app.listen(PORT, () => {
-  console.log(`Server is listening on http://localhost:${PORT}/`);
 });
 
 export default app;

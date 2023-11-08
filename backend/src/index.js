@@ -1,16 +1,22 @@
 import express from "express";
-import authRouter from "./src/routes/authRoute";
-import userRouter from "./src/routes/userRoute";
+import cors from "cors";
+import authRouter from "./routes/authRoute";
+import userRouter from "./routes/userRoute";
 
 const app = express();
 const PORT = 3000;
 
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.use(authRouter);
 app.use(userRouter);
+
+app.get("/", (req, res) => {
+  res.json({ msg: "Hello world!" });
+});
 
 // Custom error handler
 app.use((err, req, res, next) => {
@@ -26,3 +32,5 @@ app.use((err, req, res, next) => {
 app.listen(PORT, () => {
   console.log(`Server is listening on http://localhost:${PORT}/`);
 });
+
+export default app;

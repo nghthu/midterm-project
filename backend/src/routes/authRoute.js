@@ -2,6 +2,7 @@ import express from "express";
 import {
   signup,
   login,
+  logout,
   validateLoginInput,
   validateSignupInput,
   handleRefreshToken,
@@ -12,6 +13,7 @@ const authRouter = express.Router();
 
 authRouter.post("/login", validateLoginInput, login);
 authRouter.post("/signup", validateSignupInput, signup);
-authRouter.post("/refresh-token", isAuthenticated, handleRefreshToken);
+authRouter.post("/refresh-token", handleRefreshToken);
+authRouter.post("/logout", isAuthenticated, logout);
 
 export default authRouter;

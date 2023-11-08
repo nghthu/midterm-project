@@ -8,6 +8,7 @@ const sequelize = new Sequelize(DATABASE_URL, {
       require: true,
     },
   },
+  dialectModule: pg,
 });
 
 sequelize

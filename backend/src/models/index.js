@@ -1,4 +1,5 @@
 import { Sequelize, DataTypes } from "sequelize";
+import pg from "pg";
 import { DATABASE_URL } from "../lib/constants";
 import initUser from "./userModel";
 

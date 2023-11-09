@@ -1,7 +1,10 @@
 import bcrypt from "bcrypt";
 import {
-  ERROR_FULLNAME_NOT_EMPTY,
   ERROR_REQUIRE_ALL_FIELDS,
+  ERROR_FULLNAME_NOT_EMPTY,
+  ERROR_EMAIL_NOT_EMPTY,
+  ERROR_PASSWORD_NOT_EMPTY,
+  ERROR_TEL_NOT_EMPTY,
   SALT_ROUNDS,
 } from "../lib/constants";
 import { User } from "../models";

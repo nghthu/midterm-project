@@ -12,7 +12,7 @@ const getProfile = async (req, res) => {
   return res.json(user);
 };
 
-const validateProfile = (req, res) => {
+const validateProfile = (req, res, next) => {
   const profile = req.body;
 
   if (

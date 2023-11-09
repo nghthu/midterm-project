@@ -1,6 +1,6 @@
 .container {
   background: url("/boat-sailing-ocean.jpg");
-  height: 130vh;
+  height: 100vh;
   background-size: cover;
   background-position: center;
 }
@@ -19,7 +19,7 @@
   font-size: 5rem;
   font-weight: 900;
   position: absolute;
-  top: 15%;
+  top: 5%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: max-content;
@@ -28,10 +28,10 @@
 
 .card {
   background-color: white;
-  height: 85vh;
+  height: 75vh;
   width: 700px;
   position: absolute;
-  top: 70%;
+  top: 60%;
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 10px;

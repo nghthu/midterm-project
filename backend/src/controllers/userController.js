@@ -2,6 +2,7 @@ import bcrypt from "bcrypt";
 import {
   ERROR_FULLNAME_NOT_EMPTY,
   ERROR_REQUIRE_ALL_FIELDS,
+  SALT_ROUNDS,
 } from "../lib/constants";
 import { User } from "../models";
 

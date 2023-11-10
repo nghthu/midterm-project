@@ -1,20 +1,18 @@
 import { cookies } from "next/headers";
+import { LOGIN_URI } from "@/lib/constants";
 
 export async function POST(req) {
   const data = await req.json();
 
   console.log(data);
 
-  const response = await fetch(
-    "https://musical-crepe-96c606.netlify.app/api/v1/auth/login",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    }
-  );
+  const response = await fetch(LOGIN_URI, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
 
   const responseBody = await response.json();
 

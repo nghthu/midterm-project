@@ -14,15 +14,15 @@ const SignUp = () => {
         <form className={styles["signin-form"]}>
           <Input type="email" placeholder="Email" />
           <p className={styles["none-display"]}>Please enter a valid email.</p>
-          <Input type="text" placeholder="Full name" />
+          <Input name="fullName" type="text" placeholder="Full name" />
           <p className={styles["none-display"]}>
             Name cannot contain special characters.
           </p>
-          <Input type="text" placeholder="Phone" />
+          <Input name="tel" type="text" placeholder="Phone" />
           <p className={styles["none-display"]}>
             Please enter a valid phone number.
           </p>
-          <Input type="password" placeholder="Password" />
+          <Input name="password" type="password" placeholder="Password" />
           <p className={styles["none-display"]}>
             Your password must contain between 4 and 60 characters.
           </p>

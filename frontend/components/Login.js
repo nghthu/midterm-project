@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
@@ -12,51 +12,51 @@ const Login = () => {
   const router = useRouter();
   const [isvalid, setIsValid] = useState(true);
 
-  const emailInputRef = useRef();
-  const passwordInputRef = useRef();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const email = emailInputRef.current?.value;
-  const password = passwordInputRef.current?.value;
+  const changeHandler = (event) => {
+    const { name, value } = event.target;
 
-  console.log("data in login: ", email, password);
+    if (name === "email") setEmail(value);
+    else setPassword(value);
+  };
 
   const submitHandler = async (event) => {
     event.preventDefault();
 
-    // const response = await fetch("/api/login", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({ email, password }),
-    // });
+    const response = await fetch("/api/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+    });
 
-    // if (response.status === 422 || response.status === 401) {
-    //   setIsValid(false);
-    //   return response;
-    // }
+    if (response.status === 422 || response.status === 401) {
+      setIsValid(false);
+      return;
+    }
 
-    // if (!response.ok) {
-    //   setIsValid(false);
-    //   return;
-    // }
+    if (!response.ok) {
+      setIsValid(false);
+      return;
+    }
 
-    // const resData = await response.json();
+    const resData = await response.json();
+    console.log(resData);
 
-    // const resData = response.resData;
-    // const accessToken = resData.accessToken;
-    // const refreshToken = resData.refreshToken;
-    // localStorage.setItem("accessToken", accessToken);
-    // const expiration = new Date();
-    // expiration.setHours(expiration.getMinutes() + 5);
-    // localStorage.setItem("expiration", expiration.toISOString());
+    const message = resData.message;
 
-    // emailInputRef.current.clear();
-    // passwordInputRef.current.clear();
-
-    setIsValid((prevState) => !prevState);
-
-    // return router.push("/dashboard");
+    if (message === "No User Found" || message === "Something went wrong") {
+      setIsValid(false);
+    }
+    if (message === "Log in successfully") {
+      setEmail("");
+      setPassword("");
+      setIsValid(true);
+      return router.push("/dashboard");
+    }
   };
 
   return (
@@ -65,17 +65,19 @@ const Login = () => {
         <p className={styles["signin-label"]}>Log In</p>
         <form onSubmit={submitHandler} className={styles["signin-form"]}>
           <Input
-            ref={emailInputRef}
             name="email"
             type="email"
             placeholder="Email"
+            onChange={changeHandler}
+            value={email}
           />
           <p className={styles["none-display"]}>Please enter a valid email.</p>
           <Input
-            ref={passwordInputRef}
             name="password"
             type="password"
             placeholder="Password"
+            onChange={changeHandler}
+            value={password}
           />
           <p className={isvalid ? styles["none-display"] : ""}>
             Incorrect Email or Password.

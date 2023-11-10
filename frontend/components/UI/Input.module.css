@@ -37,7 +37,8 @@
 }
 
 .input:focus ~ .label,
-.input:valid ~ .label {
+.input:valid ~ .label,
+.input:not(:placeholder-shown) ~ .label {
   top: 0.7em;
   left: 1;
   font-size: 0.8em;

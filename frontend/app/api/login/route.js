@@ -27,7 +27,6 @@ export async function POST(req) {
   console.log(responseBody);
   cookies().set("refreshToken", responseBody.refreshToken, { httpOnly: true });
   cookies().set("accessToken", responseBody.accessToken);
-  // localStorage.setItem("accessToken", responseBody.accessToken);
 
   return new Response(
     JSON.stringify({

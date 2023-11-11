@@ -8,6 +8,7 @@ const Input = (props) => {
         type={props.type}
         className={styles.input}
         onChange={props.onChange}
+        value={props.value}
         required
       />
       <label className={styles.label}>{props.placeholder}</label>

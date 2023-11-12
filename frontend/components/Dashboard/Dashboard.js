@@ -2,14 +2,13 @@
 
 import useSWR, { mutate, useSWRConfig } from "swr";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 import Button from "../UI/Button/Button";
 import styles from "./Dashboard.module.css";
 import Loading from "../UI/Loading/Loading";
 import { useEffect, useState } from "react";
 
 const Dashboard = () => {
-  const router = useRouter();
   const [info, setInfo] = useState({
     fullName: "",
     email: "",
@@ -64,7 +63,6 @@ const Dashboard = () => {
   };
 
   const { data, error, isLoading } = useSWR("/api/dashboard", fetcher);
-  console.log(data, error, isLoading);
 
   useEffect(() => {
     if (data !== undefined)
@@ -76,11 +74,9 @@ const Dashboard = () => {
         sex: data.info.sex || "male",
         address: data.info.address || "",
       }));
-    // dùng kiểu này thì luôn quay về login và hiển thị 1 chút xíu dashboard
-    // if (error) router.push("/login");
   }, [data, isLoading]);
 
-  if (error) return <p>Error</p>;
+  if (error) return redirect("/login");
   if (isLoading) return <Loading />;
 
   return (

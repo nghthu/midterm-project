@@ -11,6 +11,7 @@ import styles from "./Login.module.css";
 const Login = () => {
   const router = useRouter();
   const [isvalid, setIsValid] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -25,6 +26,8 @@ const Login = () => {
   const submitHandler = async (event) => {
     event.preventDefault();
 
+    setIsLoading(true);
+
     const response = await fetch("/api/login", {
       method: "POST",
       headers: {
@@ -33,10 +36,7 @@ const Login = () => {
       body: JSON.stringify({ email, password }),
     });
 
-    if (response.status === 422 || response.status === 401) {
-      setIsValid(false);
-      return;
-    }
+    setIsLoading(false);
 
     if (!response.ok) {
       setIsValid(false);
@@ -55,7 +55,7 @@ const Login = () => {
       setEmail("");
       setPassword("");
       setIsValid(true);
-      return router.push("/dashboard");
+      router.push("/dashboard");
     }
   };
 
@@ -82,7 +82,8 @@ const Login = () => {
           <p className={isvalid ? styles["none-display"] : ""}>
             Incorrect Email or Password.
           </p>
-          <Button>Log In</Button>
+          {!isLoading && <Button>Log In</Button>}
+          {isLoading && <Button className={styles.enable}>Loading ...</Button>}
         </form>
         <div className={styles["sign-up"]}>
           <p>Need an account?</p>

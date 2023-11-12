@@ -86,3 +86,9 @@
   color: white;
   margin-left: 5px;
 }
+
+.enable {
+  pointer-events: none;
+  cursor: context-menu;
+  background-color: transparent;
+}

@@ -6,7 +6,7 @@ import {
   REFRESH_TOKEN_URI,
 } from "@/lib/constants";
 
-export async function GET(req) {
+export async function GET() {
   const accessToken = cookies().get("accessToken");
   console.log(chalk.bgYellow("accessToken"), accessToken);
   const refreshToken = cookies().get("refreshToken");

@@ -44,7 +44,6 @@ const Login = () => {
     }
 
     const resData = await response.json();
-    console.log(resData);
 
     const message = resData.message;
 

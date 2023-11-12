@@ -7,8 +7,11 @@ import Button from "../UI/Button/Button";
 import styles from "./Dashboard.module.css";
 import Loading from "../UI/Loading/Loading";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 const Dashboard = () => {
+  const router = useRouter();
+  const [isRedirecting, setIsRedirecting] = useState(false);
   const [info, setInfo] = useState({
     fullName: "",
     email: "",
@@ -49,7 +52,6 @@ const Dashboard = () => {
     console.log(info);
 
     cache.delete("/api/dashboard");
-
     const response = await fetch("/api/dashboard", {
       method: "PUT",
       headers: {
@@ -59,6 +61,18 @@ const Dashboard = () => {
     });
 
     mutate("/api/dashboard");
+  };
+
+  const logOutHandler = async () => {
+    setIsRedirecting(true);
+    const response = await fetch("/api/dashboard", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    setIsRedirecting(false);
+    router.push("/");
   };
 
   const { data, error, isLoading } = useSWR("/api/dashboard", fetcher);
@@ -81,9 +95,19 @@ const Dashboard = () => {
   return (
     <div className={styles.container}>
       <div className={styles.logout}>
-        <Link href="/">
-          <Button className={styles.signin}>Log out</Button>
-        </Link>
+        {!isRedirecting && (
+          <Button className={styles.signin} onClick={logOutHandler}>
+            Log out
+          </Button>
+        )}
+        {isRedirecting && (
+          <Button
+            className={`${styles.signin} ${styles.enable}`}
+            onClick={logOutHandler}
+          >
+            Redirecting ...
+          </Button>
+        )}
       </div>
       <h1>Hello, {data?.info.fullName}</h1>
       <div className={styles.card}>

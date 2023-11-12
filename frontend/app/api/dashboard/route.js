@@ -3,6 +3,7 @@ import { cookies } from "next/headers";
 import {
   EDIT_PROFILE_URI,
   GET_PROFILE_URI,
+  LOGOUT_URI,
   REFRESH_TOKEN_URI,
 } from "@/lib/constants";
 
@@ -135,6 +136,36 @@ export async function PUT(req) {
   return new Response(
     JSON.stringify({
       info: responseData,
+    })
+  );
+}
+
+export async function POST() {
+  const accessToken = cookies().get("accessToken");
+  const refreshToken = cookies().get("refreshToken");
+
+  const response = await fetch(LOGOUT_URI, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${accessToken.value}`,
+    },
+    body: JSON.stringify({ refreshToken: refreshToken.value }),
+  });
+
+  const responseData = await response.json();
+  console.log(responseData);
+
+  if (!response.ok) {
+    return new Response(JSON.stringify({ error: responseData.error }));
+  }
+
+  cookies().delete("accessToken");
+  cookies().delete("refreshToken");
+
+  return new Response(
+    JSON.stringify({
+      message: "Logout Successfully",
     })
   );
 }

@@ -24,8 +24,7 @@ const validateProfile = (req, res, next) => {
     !profile.hasOwnProperty("email") ||
     !profile.hasOwnProperty("tel") ||
     !profile.hasOwnProperty("sex") ||
-    !profile.hasOwnProperty("address") ||
-    !profile.hasOwnProperty("password")
+    !profile.hasOwnProperty("address")
   ) {
     res.status(400);
     throw new Error(ERROR_REQUIRE_ALL_FIELDS);
@@ -41,11 +40,6 @@ const validateProfile = (req, res, next) => {
     throw new Error(ERROR_EMAIL_NOT_EMPTY);
   }
 
-  if (!profile.password) {
-    res.status(400);
-    throw new Error(ERROR_PASSWORD_NOT_EMPTY);
-  }
-
   if (!profile.tel) {
     res.status(400);
     throw new Error(ERROR_TEL_NOT_EMPTY);
@@ -57,7 +51,6 @@ const validateProfile = (req, res, next) => {
 const editProfile = async (req, res) => {
   const profile = req.body;
   const user = await User.findByPk(req.user.id);
-  const hashedPw = await bcrypt.hash(profile.password, SALT_ROUNDS);
 
   await user.update({
     email: profile.email,
@@ -65,7 +58,6 @@ const editProfile = async (req, res) => {
     tel: profile.tel,
     sex: profile.sex,
     address: profile.address,
-    password: hashedPw,
   });
 
   return res.json({

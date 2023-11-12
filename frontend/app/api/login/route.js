@@ -14,23 +14,19 @@ export async function POST(req) {
     body: JSON.stringify(data),
   });
 
+  if (response.status === 401 || !response.ok) {
+    return new Response(JSON.stringify({ message: "Something went wrong" }));
+  }
+
   const responseBody = await response.json();
 
   if (responseBody?.error) {
     return new Response(JSON.stringify({ message: "No User Found" }));
   }
 
-  if (response.status === 401 || !response.ok) {
-    return new Response(JSON.stringify({ message: "Something went wrong" }));
-  }
-
   console.log(responseBody);
   cookies().set("refreshToken", responseBody.refreshToken, { httpOnly: true });
   cookies().set("accessToken", responseBody.accessToken);
 
-  return new Response(
-    JSON.stringify({
-      message: "Log in successfully",
-    })
-  );
+  return new Response(JSON.stringify({ message: "Log in successfully" }));
 }

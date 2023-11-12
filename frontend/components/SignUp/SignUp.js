@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 
-import Input from "@/components/UI/Input";
-import Button from "@/components/UI/Button";
+import Input from "@/components/UI/Input/Input";
+import Button from "@/components/UI/Button/Button";
 import styles from "./SignUp.module.css";
 
 const SignUp = () => {

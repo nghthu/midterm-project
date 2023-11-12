@@ -2,7 +2,7 @@ export const {
   LOGIN_URI,
   SIGNUP_URI,
   LOGOUT_URI,
-  REFRESH_TOKEN,
+  REFRESH_TOKEN_URI,
   GET_PROFILE_URI,
   EDIT_PROFILE_URI,
 } = process.env;

@@ -1,6 +1,6 @@
 "use client";
 
-import useSWR from "swr";
+import useSWR, { mutate, useSWRConfig } from "swr";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Button from "../UI/Button/Button";
@@ -44,12 +44,27 @@ const Dashboard = () => {
 
     return data;
   };
+  const { cache } = useSWRConfig();
 
   const submitHandler = async (event) => {
     event.preventDefault();
+    console.log(info);
+
+    cache.delete("/api/dashboard");
+
+    const response = await fetch("/api/dashboard", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(info),
+    });
+
+    mutate("/api/dashboard");
   };
 
   const { data, error, isLoading } = useSWR("/api/dashboard", fetcher);
+  console.log(data, error, isLoading);
 
   useEffect(() => {
     if (data !== undefined)
@@ -63,7 +78,7 @@ const Dashboard = () => {
       }));
     // dùng kiểu này thì luôn quay về login và hiển thị 1 chút xíu dashboard
     // if (error) router.push("/login");
-  }, [data]);
+  }, [data, isLoading]);
 
   if (error) return <p>Error</p>;
   if (isLoading) return <Loading />;
@@ -121,7 +136,6 @@ const Dashboard = () => {
                 type="password"
                 value={info.password}
                 onChange={inputChangeHandler}
-                required
               />
               <div className={styles["radio-group"]}>
                 <label className={styles["radio-container"]}>

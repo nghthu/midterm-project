@@ -14,7 +14,7 @@ export async function POST(req) {
     body: JSON.stringify(data),
   });
 
-  if (response.status === 401 || !response.ok) {
+  if (!response.ok) {
     return new Response(JSON.stringify({ message: "Something went wrong" }));
   }
 

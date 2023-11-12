@@ -10,7 +10,7 @@ import styles from "./Login.module.css";
 
 const Login = () => {
   const router = useRouter();
-  const [isvalid, setIsValid] = useState(true);
+  const [isValid, setIsValid] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
 
   const [email, setEmail] = useState("");
@@ -78,7 +78,7 @@ const Login = () => {
             onChange={changeHandler}
             value={password}
           />
-          <p className={isvalid ? styles["none-display"] : ""}>
+          <p className={isValid ? styles["none-display"] : ""}>
             Incorrect Email or Password.
           </p>
           {!isLoading && <Button>Log In</Button>}

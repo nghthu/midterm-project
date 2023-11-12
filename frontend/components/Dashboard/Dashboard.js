@@ -12,7 +12,6 @@ const Dashboard = () => {
   const [info, setInfo] = useState({
     fullName: "",
     email: "",
-    password: "",
     tel: "",
     sex: "male",
     address: "",
@@ -108,31 +107,7 @@ const Dashboard = () => {
                 value={info.address}
                 onChange={inputChangeHandler}
               />
-              <p className={styles.tag}>Phone Number</p>
-              <input
-                name="tel"
-                type="text"
-                value={info.tel}
-                onChange={inputChangeHandler}
-                required
-              />
-            </div>
-            <div className={styles.column}>
-              <p className={styles.tag}>Email</p>
-              <input
-                name="email"
-                type="email"
-                value={info.email}
-                onChange={inputChangeHandler}
-                required
-              />
-              <p className={styles.tag}>Password</p>
-              <input
-                name="password"
-                type="password"
-                value={info.password}
-                onChange={inputChangeHandler}
-              />
+              <p className={styles.tag}>Sex</p>
               <div className={styles["radio-group"]}>
                 <label className={styles["radio-container"]}>
                   Male
@@ -155,6 +130,24 @@ const Dashboard = () => {
                   <span className={styles.checkmark}></span>
                 </label>
               </div>
+            </div>
+            <div className={styles.column}>
+              <p className={styles.tag}>Email</p>
+              <input
+                name="email"
+                type="email"
+                value={info.email}
+                onChange={inputChangeHandler}
+                required
+              />
+              <p className={styles.tag}>Phone Number</p>
+              <input
+                name="tel"
+                type="text"
+                value={info.tel}
+                onChange={inputChangeHandler}
+                required
+              />
             </div>
           </div>
           <Button>Update info</Button>

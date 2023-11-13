@@ -10,6 +10,7 @@ import styles from "./SignUp.module.css";
 
 const SignUp = () => {
   const router = useRouter();
+
   const [registrationData, setRegistrationData] = useState({
     fullName: "",
     email: "",

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import Input from "@/components/UI/Input/Input";
@@ -18,6 +18,18 @@ const SignUp = () => {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [isValid, setIsValid] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch("/api");
+      const resData = await response.json();
+
+      if (resData?.message) {
+        router.push("/dashboard");
+      }
+    };
+    fetchData();
+  }, []);
 
   const changeHandler = (event) => {
     const { name, value } = event.target;

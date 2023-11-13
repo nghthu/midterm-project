@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
@@ -15,6 +15,18 @@ const Login = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch("/api");
+      const resData = await response.json();
+
+      if (resData?.message) {
+        router.push("/dashboard");
+      }
+    };
+    fetchData();
+  }, []);
 
   const changeHandler = (event) => {
     const { name, value } = event.target;
@@ -54,6 +66,7 @@ const Login = () => {
       setEmail("");
       setPassword("");
       setIsValid(true);
+      console.log("redirect");
       router.push("/dashboard");
     }
   };

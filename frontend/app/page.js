@@ -1,19 +1,27 @@
-// import { useRouter } from "next/navigation";
-import { cookies } from "next/headers";
+"use client";
+
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import Link from "next/link";
 import styles from "./page.module.css";
 import Button from "@/components/UI/Button/Button";
-import Link from "next/link";
 
 export default function Home() {
-  // const router = useRouter();
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
 
-  // useEffect(() => {
-  //   const accessToken = cookies().get("accessToken");
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch("/api");
+      const resData = await response.json();
 
-  //   if (accessToken) {
-  //     router.push("/dashboard");
-  //   }
-  // }, []);
+      if (resData?.message) {
+        router.push("/dashboard");
+      }
+    };
+    fetchData();
+  }, []);
+
   return (
     <div className={styles.container}>
       <div className={styles.auth}>
